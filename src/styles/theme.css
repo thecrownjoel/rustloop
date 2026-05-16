@@ -101,8 +101,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .site-logo-img {
-	height: 64px !important;
-	margin: -12px 0 !important;
+	height: 128px !important;
+	margin: -24px 0 !important;
 }
 
 .nav-links a {
@@ -246,4 +246,69 @@ h1, h2, h3, h4, h5, h6 {
 .testimonials,
 .faq {
 	border-top: 1px solid #2a2a2a;
+}
+
+/* --- Scroll reveal animations --- */
+.scroll-reveal {
+	opacity: 0;
+	transform: translateY(40px);
+	transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.scroll-reveal.revealed {
+	opacity: 1;
+	transform: translateY(0);
+}
+
+.scroll-reveal-delay-1 { transition-delay: 0.1s; }
+.scroll-reveal-delay-2 { transition-delay: 0.2s; }
+.scroll-reveal-delay-3 { transition-delay: 0.3s; }
+
+/* Feature cards stagger in */
+.feature-card {
+	opacity: 0;
+	transform: translateY(30px);
+	transition: opacity 0.6s ease, transform 0.6s ease,
+		border-color var(--transition-base), box-shadow var(--transition-base) !important;
+}
+
+.feature-card.revealed {
+	opacity: 1;
+	transform: translateY(0);
+}
+
+/* FAQ items slide in */
+.faq-item {
+	opacity: 0;
+	transform: translateX(-20px);
+	transition: opacity 0.5s ease, transform 0.5s ease,
+		border-color var(--transition-fast) !important;
+}
+
+.faq-item.revealed {
+	opacity: 1;
+	transform: translateX(0);
+}
+
+/* Hero content fades up */
+.hero-content {
+	opacity: 0;
+	transform: translateY(30px);
+	transition: opacity 1s ease, transform 1s ease;
+}
+
+.hero-content.revealed {
+	opacity: 1;
+	transform: translateY(0);
+}
+
+/* --- Molten steel canvas --- */
+#molten-canvas {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	pointer-events: none;
+	z-index: 9999;
 }

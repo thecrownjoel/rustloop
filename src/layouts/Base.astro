@@ -91,6 +91,8 @@ const pageCtx = createPublicPageContext({
 			</nav>
 		</header>
 
+		<canvas id="molten-canvas" aria-hidden="true"></canvas>
+
 		<main>
 			<slot />
 		</main>
@@ -206,6 +208,118 @@ const pageCtx = createPublicPageContext({
 						root.classList.toggle("dark", e.matches);
 					}
 				});
+		</script>
+
+		<!-- Scroll reveal animations -->
+		<script>
+			const observer = new IntersectionObserver(
+				(entries) => {
+					entries.forEach((entry) => {
+						if (entry.isIntersecting) {
+							entry.target.classList.add("revealed");
+							observer.unobserve(entry.target);
+						}
+					});
+				},
+				{ threshold: 0.1, rootMargin: "0px 0px -50px 0px" }
+			);
+
+			document.querySelectorAll(".hero-content").forEach((el) => observer.observe(el));
+
+			document.querySelectorAll(".features-header, .faq-header").forEach((el) => {
+				el.classList.add("scroll-reveal");
+				observer.observe(el);
+			});
+
+			document.querySelectorAll(".feature-card").forEach((el, i) => {
+				(el as HTMLElement).style.transitionDelay = `${i * 0.1}s`;
+				observer.observe(el);
+			});
+
+			document.querySelectorAll(".faq-item").forEach((el, i) => {
+				(el as HTMLElement).style.transitionDelay = `${i * 0.1}s`;
+				observer.observe(el);
+			});
+		</script>
+
+		<!-- Molten steel drip effect -->
+		<script>
+			const canvas = document.getElementById("molten-canvas") as HTMLCanvasElement;
+			if (canvas) {
+				const ctx = canvas.getContext("2d")!;
+				interface Drop {
+					x: number;
+					y: number;
+					speed: number;
+					size: number;
+					opacity: number;
+					hue: number;
+					trail: Array<{ x: number; y: number; opacity: number }>;
+				}
+				let drops: Drop[] = [];
+
+				function resize() {
+					canvas.width = window.innerWidth;
+					canvas.height = window.innerHeight;
+				}
+				resize();
+				window.addEventListener("resize", resize);
+
+				function spawnDrop() {
+					drops.push({
+						x: Math.random() * canvas.width,
+						y: -10,
+						speed: 1.5 + Math.random() * 3,
+						size: 2 + Math.random() * 4,
+						opacity: 0.3 + Math.random() * 0.5,
+						hue: 15 + Math.random() * 20,
+						trail: [],
+					});
+				}
+
+				function animate() {
+					ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+					if (Math.random() < 0.06) spawnDrop();
+
+					for (let i = drops.length - 1; i >= 0; i--) {
+						const drop = drops[i];
+
+						drop.trail.push({ x: drop.x, y: drop.y, opacity: drop.opacity });
+						if (drop.trail.length > 20) drop.trail.shift();
+
+						for (let t = 0; t < drop.trail.length; t++) {
+							const tp = drop.trail[t];
+							const trailOpacity = (t / drop.trail.length) * tp.opacity * 0.4;
+							const trailSize = drop.size * (t / drop.trail.length) * 0.8;
+							ctx.beginPath();
+							ctx.arc(tp.x, tp.y, trailSize, 0, Math.PI * 2);
+							ctx.fillStyle = `hsla(${drop.hue}, 90%, 55%, ${trailOpacity})`;
+							ctx.fill();
+						}
+
+						ctx.shadowBlur = 12;
+						ctx.shadowColor = `hsla(${drop.hue}, 90%, 55%, ${drop.opacity * 0.6})`;
+						ctx.beginPath();
+						ctx.arc(drop.x, drop.y, drop.size, 0, Math.PI * 2);
+						ctx.fillStyle = `hsla(${drop.hue}, 90%, 60%, ${drop.opacity})`;
+						ctx.fill();
+						ctx.shadowBlur = 0;
+
+						drop.y += drop.speed;
+						drop.x += Math.sin(drop.y * 0.02) * 0.3;
+						drop.opacity -= 0.002;
+
+						if (drop.y > canvas.height + 20 || drop.opacity <= 0) {
+							drops.splice(i, 1);
+						}
+					}
+
+					requestAnimationFrame(animate);
+				}
+
+				animate();
+			}
 		</script>
 
 		<style is:global>
