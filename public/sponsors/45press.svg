@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 100">
+  <defs>
+    <style>
+      .logo-text { font-family: 'Arial Black', 'Impact', sans-serif; font-weight: 900; font-size: 82px; letter-spacing: -2px; }
+    </style>
+  </defs>
+  <text x="10" y="80" class="logo-text" fill="#ffbd39">45</text>
+  <text x="142" y="80" class="logo-text" fill="#ffbd39">PRESS</text>
+</svg>

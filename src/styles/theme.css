@@ -343,8 +343,6 @@ h1, h2, h3, h4, h5, h6 {
 .sponsor-logo {
 	height: 48px;
 	width: auto;
-	filter: invert(1) brightness(1.5);
-	mix-blend-mode: screen;
 }
 
 /* --- Molten steel canvas --- */
