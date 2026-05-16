@@ -34,7 +34,13 @@ const secondaryCta =
 				<p class="hero-cities">{node.cities}</p>
 			)}
 			<h1 class="hero-headline" set:html={headline} />
-			{subheadline && <p class="hero-subheadline">{subheadline}</p>}
+			{subheadline && (
+				<div class="hero-subheadline">
+					{subheadline.split('\n\n').map((para) => (
+						<p>{para}</p>
+					))}
+				</div>
+			)}
 			{(primaryCta || secondaryCta) && (
 				<div class="hero-actions">
 					{primaryCta && (
@@ -120,6 +126,9 @@ const secondaryCta =
 		line-height: 1.7;
 		color: #ffbd39;
 		max-width: 720px;
+		display: flex;
+		flex-direction: column;
+		gap: var(--spacing-md);
 	}
 
 	.hero-actions {
