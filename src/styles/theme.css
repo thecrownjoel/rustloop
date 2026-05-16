@@ -341,10 +341,18 @@ h1, h2, h3, h4, h5, h6 {
 	opacity: 0.8;
 }
 
-.sponsor-logo {
-	height: 60px;
-	width: auto;
-	display: block;
+svg.sponsor-logo {
+	height: 60px !important;
+	width: 240px !important;
+	display: inline-block !important;
+	visibility: visible !important;
+	opacity: 1 !important;
+}
+
+img.sponsor-logo {
+	height: 60px !important;
+	width: auto !important;
+	display: inline-block !important;
 }
 
 /* --- Molten steel canvas --- */
