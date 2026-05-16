@@ -145,12 +145,20 @@
 						{
 							"_type": "marketing.hero",
 							"_key": "hero",
-							"headline": "From the ashes of Steel City rust to the future of Artificial Intelligence",
-							"subheadline": "Youngstown, Cleveland, and Pittsburgh produced the steel that built this country. It provided a life and a future for generations of families — but that era had an expiration date. What didn't expire was the people. RustLoop brings together the best minds working on AI and opens the doors so the public can listen in.",
+							"cities": "Youngstown · Cleveland · Pittsburgh",
+							"headline": "From the ashes of<br>Steel City rust <span style='color:#ffbd39'>to the future of<br>Artificial Intelligence</span>",
+							"subheadline": "Youngstown, Cleveland, and Pittsburgh produced the steel that built this country. It provided a life and a future for generations of families — but that era had an expiration date. What didn't expire was the people. Some of the sharpest, most resilient minds in America live along the corridor connecting our three cities. Youngstown may stay divided over sports, but our roots run deeper than any rivalry.",
 							"primaryCtaLabel": "Join the Community",
 							"primaryCtaUrl": "/signup",
 							"secondaryCtaLabel": "Upcoming Events",
 							"secondaryCtaUrl": "/events"
+						},
+						{
+							"_type": "marketing.hero",
+							"_key": "mission",
+							"headline": "What is RustLoop?",
+							"subheadline": "RustLoop has a simple mission: bring together the best minds working on Artificial Intelligence — and open the doors so the public can listen in. Our country, and the world, is welcoming a transformation we haven't seen since the advent of electricity. This region helped power the last industrial revolution. We intend to help power the next one.",
+							"centered": false
 						},
 						{
 							"_type": "marketing.features",

@@ -28,9 +28,9 @@ const [menu, footerProduct, footerCompany, footerSupport] = await Promise.all([
 ]);
 
 const footerColumns = [
-	{ heading: "Product", menu: footerProduct },
-	{ heading: "Company", menu: footerCompany },
-	{ heading: "Support", menu: footerSupport },
+	{ heading: "Community", menu: footerProduct },
+	{ heading: "Cities", menu: footerCompany },
+	{ heading: "Connect", menu: footerSupport },
 ].filter((col) => col.menu && col.menu.items.length > 0);
 
 const pageCtx = createPublicPageContext({
@@ -73,10 +73,7 @@ const pageCtx = createPublicPageContext({
 		<header class="site-header">
 			<nav class="nav">
 				<a href="/" class="site-logo">
-					{siteLogo
-						? <img src={siteLogo.url} alt={siteLogo.alt || siteTitle} class="site-logo-img" />
-						: siteTitle
-					}
+					<img src={siteLogo?.url || "/rustloop-logo.png"} alt={siteLogo?.alt || siteTitle} class="site-logo-img" />
 				</a>
 				<div class="nav-links">
 					{
@@ -89,7 +86,7 @@ const pageCtx = createPublicPageContext({
 				</div>
 				<div class="nav-actions">
 					<a href="/_emdash/admin" class="nav-admin">Admin</a>
-					<a href="/signup" class="nav-cta">Get Started</a>
+					<a href="/signup" class="nav-cta">Join</a>
 				</div>
 			</nav>
 		</header>
@@ -102,10 +99,7 @@ const pageCtx = createPublicPageContext({
 			<div class="footer-content">
 				<div class="footer-brand">
 					<span class="footer-logo">
-						{siteLogo
-							? <img src={siteLogo.url} alt={siteLogo.alt || siteTitle} class="footer-logo-img" />
-							: siteTitle
-						}
+						<img src={siteLogo?.url || "/rustloop-logo.png"} alt={siteLogo?.alt || siteTitle} class="footer-logo-img" />
 					</span>
 					<p class="footer-tagline">
 						{settings?.tagline || "Build something amazing"}
@@ -132,7 +126,7 @@ const pageCtx = createPublicPageContext({
 			<div class="footer-bottom">
 				<p>
 					&copy; {new Date().getFullYear()}
-					{siteTitle}. All rights reserved.
+					{siteTitle}. From the ashes of rust to artificial intelligence.
 				</p>
 				<div class="theme-switcher">
 					<button

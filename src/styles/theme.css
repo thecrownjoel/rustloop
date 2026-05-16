@@ -6,7 +6,6 @@
 */
 
 :root {
-	/* --- Colors --- */
 	--color-bg: #111111;
 	--color-text: #ffbd39;
 	--color-muted: #cc9730;
@@ -21,7 +20,6 @@
 	--color-warning: #f59e0b;
 }
 
-/* Force dark mode to use the same brand palette — no light/dark toggle needed */
 @media (prefers-color-scheme: dark) {
 	:root:not(.light) {
 		--color-bg: #111111;
@@ -46,30 +44,75 @@
 	--color-primary-light: #f89a6a;
 }
 
-/* Override heading gradient to use flame color */
+/* Headings always flame */
 h1, h2, h3, h4, h5, h6 {
 	color: #f5793b;
 }
 
-/* Override the hero headline gradient */
+/* Hero headline: flame → gold gradient */
 .hero-headline {
-	background: linear-gradient(135deg, #f5793b 0%, #ffbd39 100%) !important;
-	-webkit-background-clip: text !important;
-	-webkit-text-fill-color: transparent !important;
-	background-clip: text !important;
+	background: none !important;
+	-webkit-background-clip: unset !important;
+	-webkit-text-fill-color: unset !important;
+	background-clip: unset !important;
+	color: #f5793b !important;
 }
 
-/* Primary buttons: flame bg with dark text for contrast */
+.hero-headline .hero-headline-accent {
+	color: #ffbd39;
+}
+
+/* Hero subheadline: gold body text, not muted */
+.hero-subheadline {
+	color: #ffbd39 !important;
+	font-size: var(--font-size-lg) !important;
+	line-height: 1.7 !important;
+}
+
+/* Buttons: solid flame with dark text */
 .btn-primary {
 	color: #111111 !important;
 	background: #f5793b !important;
+	border: none !important;
 }
 
 .btn-primary:hover {
 	background: #f89a6a !important;
+	box-shadow: 0 0 20px rgba(245, 121, 59, 0.2) !important;
 }
 
-/* Nav CTA button */
+.btn-secondary {
+	color: #ffbd39 !important;
+	border-color: #333333 !important;
+}
+
+.btn-secondary:hover {
+	border-color: #f5793b !important;
+	color: #f5793b !important;
+	background: transparent !important;
+}
+
+/* Nav: large logo, sticky dark header */
+.site-header {
+	background: rgba(17, 17, 17, 0.9) !important;
+	backdrop-filter: blur(8px);
+	-webkit-backdrop-filter: blur(8px);
+	border-bottom-color: #2a2a2a !important;
+}
+
+.site-logo-img {
+	height: 64px !important;
+	margin: -12px 0 !important;
+}
+
+.nav-links a {
+	color: #cc9730 !important;
+}
+
+.nav-links a:hover {
+	color: #f5793b !important;
+}
+
 .nav-cta {
 	color: #111111 !important;
 	background: #f5793b !important;
@@ -79,24 +122,128 @@ h1, h2, h3, h4, h5, h6 {
 	background: #f89a6a !important;
 }
 
-/* Site logo image — larger */
-.site-logo-img {
-	height: 64px !important;
-	margin: -16px 0 !important;
+.nav-admin {
+	color: #cc9730 !important;
+}
+
+/* Footer */
+.site-footer {
+	background: #111111 !important;
+	border-top-color: #2a2a2a !important;
 }
 
 .footer-logo-img {
 	height: 40px !important;
 }
 
-/* Links in footer columns */
-.footer-col a:hover {
-	color: #f5793b;
+.footer-tagline {
+	color: #cc9730 !important;
 }
 
-/* Ember glow on interactive cards */
-.feature-card:hover,
+.footer-col h4 {
+	color: #cc9730 !important;
+}
+
+.footer-col a {
+	color: #ffbd39 !important;
+}
+
+.footer-col a:hover {
+	color: #f5793b !important;
+}
+
+.footer-bottom {
+	color: #665018 !important;
+	border-top-color: #2a2a2a !important;
+}
+
+.footer-powered a {
+	color: #f5793b !important;
+}
+
+/* Hide theme switcher — RustLoop is always dark */
+.theme-switcher {
+	display: none !important;
+}
+
+/* Feature cards: dark surface with ember glow */
+.feature-card {
+	background: #1a1a1a !important;
+	border-color: #2a2a2a !important;
+}
+
+.feature-card:hover {
+	transform: translateY(-4px);
+	border-color: rgba(245, 121, 59, 0.3) !important;
+	box-shadow: 0 0 24px rgba(245, 121, 59, 0.12) !important;
+}
+
+.feature-icon {
+	background: #f5793b !important;
+	color: #111111 !important;
+}
+
+.feature-title {
+	color: #f5793b !important;
+}
+
+.feature-description {
+	color: #ffbd39 !important;
+}
+
+/* Features section header */
+.features-headline {
+	color: #f5793b !important;
+}
+
+.features-subheadline {
+	color: #ffbd39 !important;
+}
+
+/* FAQ cards */
+.faq-item {
+	background: #1a1a1a !important;
+	border-color: #2a2a2a !important;
+}
+
+.faq-item:hover {
+	border-color: #f5793b !important;
+}
+
+.faq-item[open] {
+	border-color: #f5793b !important;
+}
+
+.faq-question {
+	color: #ffbd39 !important;
+}
+
+.faq-answer p {
+	color: #cc9730 !important;
+}
+
+.faq-icon {
+	color: #f5793b !important;
+}
+
+/* Testimonials */
+.testimonials {
+	background: #1a1a1a !important;
+}
+
+.testimonial-card {
+	background: #111111 !important;
+	border-color: #2a2a2a !important;
+}
+
 .testimonial-card:hover {
-	border-color: rgba(245, 121, 59, 0.3);
-	box-shadow: 0 0 20px rgba(245, 121, 59, 0.1);
+	border-color: rgba(245, 121, 59, 0.3) !important;
+	box-shadow: 0 0 20px rgba(245, 121, 59, 0.1) !important;
+}
+
+/* Section dividers */
+.features,
+.testimonials,
+.faq {
+	border-top: 1px solid #2a2a2a;
 }
