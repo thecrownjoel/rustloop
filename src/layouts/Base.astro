@@ -1,0 +1,39 @@
+---
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import SEO from '../components/SEO.astro';
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description: string;
+  image?: string;
+  type?: 'website' | 'article';
+  publishedDate?: Date;
+}
+
+const { title, description, image, type, publishedDate } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <SEO
+      title={title}
+      description={description}
+      image={image}
+      type={type}
+      publishedDate={publishedDate}
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  </head>
+  <body class="flex min-h-screen flex-col">
+    <Header />
+    <main class="flex-1 pt-16">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

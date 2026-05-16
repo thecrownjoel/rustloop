@@ -1,0 +1,83 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base
+  title="About"
+  description="Learn about RustLoop — our mission, story, and the AI/ML community we're building across the Rust Belt."
+>
+  <section class="py-20 sm:py-24">
+    <div class="mx-auto max-w-3xl px-6">
+      <p class="text-sm font-semibold uppercase tracking-widest text-rust-400">About</p>
+      <h1 class="mt-4 text-4xl font-extrabold tracking-tight text-steel-50 sm:text-5xl">
+        [TODO: copy — page heading to be written]
+      </h1>
+
+      <div class="mt-12 space-y-12">
+        <!-- Mission -->
+        <div>
+          <h2 class="text-2xl font-bold text-steel-50">Our Mission</h2>
+          <p class="mt-4 text-lg leading-relaxed text-steel-300">
+            [TODO: copy — to be written. RustLoop's mission statement. What drives
+            this organization, what it aims to accomplish for AI/ML practitioners
+            in the Rust Belt.]
+          </p>
+        </div>
+
+        <!-- Story -->
+        <div>
+          <h2 class="text-2xl font-bold text-steel-50">Our Story</h2>
+          <p class="mt-4 text-lg leading-relaxed text-steel-300">
+            [TODO: copy — to be written. The origin story. How RustLoop started,
+            the connection between the Rust Belt's industrial heritage and its
+            future in AI/ML. The "from the ashes of rust to artificial intelligence"
+            narrative.]
+          </p>
+          <p class="mt-4 text-lg leading-relaxed text-steel-300">
+            [TODO: copy — to be written. Second paragraph continuing the story.
+            What happened next, how the community grew.]
+          </p>
+        </div>
+
+        <!-- Who It's For -->
+        <div>
+          <h2 class="text-2xl font-bold text-steel-50">Who It's For</h2>
+          <p class="mt-4 text-lg leading-relaxed text-steel-300">
+            [TODO: copy — to be written. Who belongs at RustLoop. Data scientists,
+            ML engineers, researchers, students, hobbyists, the curious. What
+            unites them.]
+          </p>
+          <ul class="mt-6 space-y-3">
+            {[
+              '[TODO: audience type 1]',
+              '[TODO: audience type 2]',
+              '[TODO: audience type 3]',
+              '[TODO: audience type 4]',
+            ].map((item) => (
+              <li class="flex items-start gap-3">
+                <span class="mt-1.5 h-2 w-2 shrink-0 rounded-full bg-ember" aria-hidden="true"></span>
+                <span class="text-steel-300">{item}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <!-- CTA -->
+        <div class="rounded-xl border border-steel-700 bg-steel-900/50 p-8 text-center">
+          <h2 class="text-2xl font-bold text-steel-50">
+            [TODO: copy — CTA heading]
+          </h2>
+          <p class="mt-3 text-steel-300">
+            [TODO: copy — to be written. CTA description.]
+          </p>
+          <a
+            href="/events"
+            class="ember-glow mt-6 inline-flex items-center justify-center rounded-lg bg-ember px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-rust-600"
+          >
+            Find a Meetup
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>

@@ -1,0 +1,63 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('blog', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+---
+
+<Base
+  title="Blog"
+  description="Writings from the RustLoop community — AI/ML insights, event recaps, and perspectives from the Rust Belt."
+>
+  <section class="py-20 sm:py-24">
+    <div class="mx-auto max-w-3xl px-6">
+      <p class="text-sm font-semibold uppercase tracking-widest text-rust-400">Blog</p>
+      <h1 class="mt-4 text-4xl font-extrabold tracking-tight text-steel-50 sm:text-5xl">
+        From the Community
+      </h1>
+      <p class="mt-4 text-lg text-steel-300">
+        [TODO: copy — to be written. Blog intro text.]
+      </p>
+
+      <div class="mt-12 space-y-8">
+        {posts.length === 0 && (
+          <p class="text-steel-400">No posts yet. Check back soon.</p>
+        )}
+
+        {posts.map((post) => (
+          <article class="ember-glow group rounded-xl border border-steel-700 bg-steel-900/50 p-6 transition-colors hover:border-rust-700/50">
+            <a href={`/blog/${post.id}`} class="block">
+              <div class="flex flex-wrap items-center gap-3 text-sm text-steel-400">
+                <time datetime={post.data.date.toISOString()}>
+                  {post.data.date.toLocaleDateString('en-US', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric',
+                  })}
+                </time>
+                {post.data.tags.length > 0 && (
+                  <>
+                    <span aria-hidden="true">&middot;</span>
+                    {post.data.tags.map((tag) => (
+                      <span class="rounded-full bg-steel-800 px-2.5 py-0.5 text-xs font-medium text-steel-300">
+                        {tag}
+                      </span>
+                    ))}
+                  </>
+                )}
+              </div>
+              <h2 class="mt-3 text-xl font-bold text-steel-50 transition-colors group-hover:text-ember">
+                {post.data.title}
+              </h2>
+              <p class="mt-2 text-steel-300">{post.data.description}</p>
+              <span class="mt-4 inline-block text-sm font-medium text-rust-400 transition-colors group-hover:text-ember">
+                Read more &rarr;
+              </span>
+            </a>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+</Base>
