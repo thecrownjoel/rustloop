@@ -9,10 +9,10 @@ const navLinks = [
 const currentPath = Astro.url.pathname;
 ---
 
-<header class="fixed top-0 left-0 right-0 z-50 border-b border-steel-800 bg-steel-950/90 backdrop-blur-sm">
+<header class="fixed top-0 left-0 right-0 z-50 border-b border-dark-700 bg-dark-950/90 backdrop-blur-sm">
   <nav class="mx-auto flex max-w-6xl items-center justify-between px-6 py-4" aria-label="Main navigation">
-    <a href="/" class="flex items-center gap-2 text-xl font-bold tracking-tight text-steel-50">
-      <span class="text-ember">Rust</span><span>Loop</span>
+    <a href="/" class="flex items-center gap-2">
+      <img src="/rustloop-logo.png" alt="RustLoop" class="h-8 w-auto" />
     </a>
 
     <!-- Desktop nav -->
@@ -22,10 +22,10 @@ const currentPath = Astro.url.pathname;
           <a
             href={link.href}
             class:list={[
-              'text-sm font-medium transition-colors hover:text-ember',
+              'text-sm font-medium transition-colors hover:text-flame',
               currentPath === link.href || (link.href !== '/' && currentPath.startsWith(link.href))
-                ? 'text-ember'
-                : 'text-steel-300',
+                ? 'text-flame'
+                : 'text-gold-600',
             ]}
           >
             {link.label}
@@ -37,7 +37,7 @@ const currentPath = Astro.url.pathname;
     <!-- Mobile menu button -->
     <button
       id="mobile-menu-btn"
-      class="text-steel-300 hover:text-ember md:hidden"
+      class="text-gold-600 hover:text-flame md:hidden"
       aria-label="Toggle navigation menu"
       aria-expanded="false"
       aria-controls="mobile-menu"
@@ -49,17 +49,17 @@ const currentPath = Astro.url.pathname;
   </nav>
 
   <!-- Mobile menu -->
-  <div id="mobile-menu" class="hidden border-t border-steel-800 bg-steel-950 md:hidden">
+  <div id="mobile-menu" class="hidden border-t border-dark-700 bg-dark-950 md:hidden">
     <ul class="flex flex-col gap-1 px-6 py-4">
       {navLinks.map((link) => (
         <li>
           <a
             href={link.href}
             class:list={[
-              'block rounded-lg px-3 py-2 text-sm font-medium transition-colors hover:bg-steel-900 hover:text-ember',
+              'block rounded-lg px-3 py-2 text-sm font-medium transition-colors hover:bg-dark-800 hover:text-flame',
               currentPath === link.href || (link.href !== '/' && currentPath.startsWith(link.href))
-                ? 'text-ember'
-                : 'text-steel-300',
+                ? 'text-flame'
+                : 'text-gold-600',
             ]}
           >
             {link.label}

@@ -8,30 +8,30 @@ import Base from '../layouts/Base.astro';
 >
   <!-- Hero -->
   <section class="relative overflow-hidden">
-    <div class="absolute inset-0 bg-gradient-to-b from-rust-900/20 to-steel-950" aria-hidden="true"></div>
+    <div class="absolute inset-0 bg-gradient-to-b from-flame-900/20 to-dark-950" aria-hidden="true"></div>
     <div class="relative mx-auto max-w-6xl px-6 py-24 sm:py-32 lg:py-40">
       <div class="max-w-3xl">
-        <p class="text-sm font-semibold uppercase tracking-widest text-rust-400">
+        <p class="text-sm font-semibold uppercase tracking-widest text-flame">
           Youngstown &middot; Cleveland &middot; Pittsburgh
         </p>
-        <h1 class="mt-4 text-4xl font-extrabold tracking-tight text-steel-50 sm:text-5xl lg:text-6xl">
+        <h1 class="mt-4 text-4xl font-extrabold tracking-tight text-flame sm:text-5xl lg:text-6xl">
           From the ashes of rust<br />
-          <span class="text-ember">to artificial intelligence.</span>
+          <span class="text-gold">to artificial intelligence.</span>
         </h1>
-        <p class="mt-6 text-lg leading-relaxed text-steel-300 sm:text-xl">
+        <p class="mt-6 text-lg leading-relaxed text-gold sm:text-xl">
           [TODO: copy — to be written. Hero subheading describing RustLoop's mission
           to connect AI/ML practitioners across the Rust Belt. 2-3 sentences.]
         </p>
         <div class="mt-10 flex flex-col gap-4 sm:flex-row">
           <a
             href="/about"
-            class="ember-glow inline-flex items-center justify-center rounded-lg bg-ember px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-rust-600"
+            class="ember-glow inline-flex items-center justify-center rounded-lg bg-flame px-6 py-3 text-sm font-semibold text-dark-950 transition-colors hover:bg-flame-300"
           >
             Join the Community
           </a>
           <a
             href="/events"
-            class="inline-flex items-center justify-center rounded-lg border border-steel-600 px-6 py-3 text-sm font-semibold text-steel-200 transition-colors hover:border-rust-500 hover:text-ember"
+            class="inline-flex items-center justify-center rounded-lg border border-dark-500 px-6 py-3 text-sm font-semibold text-gold transition-colors hover:border-flame hover:text-flame"
           >
             Upcoming Events
           </a>
@@ -41,12 +41,12 @@ import Base from '../layouts/Base.astro';
   </section>
 
   <!-- What is RustLoop -->
-  <section class="border-t border-steel-800 py-20 sm:py-24">
+  <section class="border-t border-dark-700 py-20 sm:py-24">
     <div class="mx-auto max-w-6xl px-6">
-      <h2 class="text-3xl font-bold tracking-tight text-steel-50 sm:text-4xl">
-        What is <span class="text-ember">RustLoop</span>?
+      <h2 class="text-3xl font-bold tracking-tight text-flame sm:text-4xl">
+        What is RustLoop?
       </h2>
-      <p class="mt-4 max-w-2xl text-lg text-steel-300">
+      <p class="mt-4 max-w-2xl text-lg text-gold">
         [TODO: copy — to be written. Brief description of RustLoop as a community organization.
         What it does, who it serves, why it exists.]
       </p>
@@ -54,12 +54,12 @@ import Base from '../layouts/Base.astro';
   </section>
 
   <!-- Three Cities -->
-  <section class="border-t border-steel-800 bg-steel-900/30 py-20 sm:py-24">
+  <section class="border-t border-dark-700 bg-dark-900/30 py-20 sm:py-24">
     <div class="mx-auto max-w-6xl px-6">
-      <h2 class="text-center text-3xl font-bold tracking-tight text-steel-50 sm:text-4xl">
+      <h2 class="text-center text-3xl font-bold tracking-tight text-flame sm:text-4xl">
         Three Cities, One Community
       </h2>
-      <p class="mx-auto mt-4 max-w-2xl text-center text-lg text-steel-300">
+      <p class="mx-auto mt-4 max-w-2xl text-center text-lg text-gold">
         [TODO: copy — to be written. Why these three cities, what connects them.]
       </p>
 
@@ -69,10 +69,10 @@ import Base from '../layouts/Base.astro';
           { city: 'Cleveland', state: 'OH', tagline: '[TODO: city tagline]' },
           { city: 'Pittsburgh', state: 'PA', tagline: '[TODO: city tagline]' },
         ].map((item) => (
-          <div class="ember-glow rounded-xl border border-steel-700 bg-steel-900/50 p-8">
-            <h3 class="text-xl font-bold text-steel-50">{item.city}</h3>
-            <p class="text-sm font-medium text-rust-400">{item.state}</p>
-            <p class="mt-3 text-steel-400">{item.tagline}</p>
+          <div class="ember-glow rounded-xl border border-dark-600 bg-dark-900/50 p-8">
+            <h3 class="text-xl font-bold text-flame">{item.city}</h3>
+            <p class="text-sm font-medium text-flame-300">{item.state}</p>
+            <p class="mt-3 text-gold-600">{item.tagline}</p>
           </div>
         ))}
       </div>
@@ -80,22 +80,22 @@ import Base from '../layouts/Base.astro';
   </section>
 
   <!-- Next Meetup Callout -->
-  <section class="border-t border-steel-800 py-20 sm:py-24">
+  <section class="border-t border-dark-700 py-20 sm:py-24">
     <div class="mx-auto max-w-6xl px-6">
-      <div class="overflow-hidden rounded-2xl border border-rust-700/30 bg-gradient-to-r from-rust-900/20 to-steel-900/50 p-8 sm:p-12">
+      <div class="overflow-hidden rounded-2xl border border-flame-700/30 bg-gradient-to-r from-flame-900/20 to-dark-900/50 p-8 sm:p-12">
         <div class="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
           <div>
-            <p class="text-sm font-semibold uppercase tracking-widest text-rust-400">Next Meetup</p>
-            <h3 class="mt-2 text-2xl font-bold text-steel-50 sm:text-3xl">
+            <p class="text-sm font-semibold uppercase tracking-widest text-flame">Next Meetup</p>
+            <h3 class="mt-2 text-2xl font-bold text-flame sm:text-3xl">
               [TODO: Next meetup title]
             </h3>
-            <p class="mt-2 text-steel-300">
+            <p class="mt-2 text-gold">
               [TODO: Date, time, location placeholder]
             </p>
           </div>
           <a
             href="/events"
-            class="ember-glow inline-flex shrink-0 items-center justify-center rounded-lg bg-ember px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-rust-600"
+            class="ember-glow inline-flex shrink-0 items-center justify-center rounded-lg bg-flame px-6 py-3 text-sm font-semibold text-dark-950 transition-colors hover:bg-flame-300"
           >
             See All Events
           </a>
@@ -105,12 +105,12 @@ import Base from '../layouts/Base.astro';
   </section>
 
   <!-- Email Signup Placeholder -->
-  <section class="border-t border-steel-800 bg-steel-900/30 py-20 sm:py-24">
+  <section class="border-t border-dark-700 bg-dark-900/30 py-20 sm:py-24">
     <div class="mx-auto max-w-6xl px-6 text-center">
-      <h2 class="text-3xl font-bold tracking-tight text-steel-50 sm:text-4xl">
+      <h2 class="text-3xl font-bold tracking-tight text-flame sm:text-4xl">
         Stay in the Loop
       </h2>
-      <p class="mx-auto mt-4 max-w-xl text-lg text-steel-300">
+      <p class="mx-auto mt-4 max-w-xl text-lg text-gold">
         [TODO: copy — to be written. Email signup CTA copy.]
       </p>
       <div class="mx-auto mt-8 flex max-w-md flex-col gap-3 sm:flex-row">
@@ -118,12 +118,12 @@ import Base from '../layouts/Base.astro';
           type="email"
           placeholder="your@email.com"
           disabled
-          class="flex-1 rounded-lg border border-steel-600 bg-steel-800 px-4 py-3 text-sm text-steel-200 placeholder-steel-500 focus:border-rust-500 focus:outline-none"
+          class="flex-1 rounded-lg border border-dark-500 bg-dark-800 px-4 py-3 text-sm text-gold placeholder-gold-800 focus:border-flame focus:outline-none"
           aria-label="Email address"
         />
         <button
           disabled
-          class="rounded-lg bg-steel-700 px-6 py-3 text-sm font-semibold text-steel-400 cursor-not-allowed"
+          class="rounded-lg bg-dark-600 px-6 py-3 text-sm font-semibold text-gold-700 cursor-not-allowed"
         >
           Coming Soon
         </button>

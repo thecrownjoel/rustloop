@@ -24,13 +24,13 @@ const { Content } = await render(post);
     <div class="mx-auto max-w-3xl px-6">
       <!-- Post header -->
       <header>
-        <a href="/blog" class="text-sm font-medium text-rust-400 transition-colors hover:text-ember">
+        <a href="/blog" class="text-sm font-medium text-flame transition-colors hover:text-flame-300">
           &larr; Back to Blog
         </a>
-        <h1 class="mt-6 text-3xl font-extrabold tracking-tight text-steel-50 sm:text-4xl lg:text-5xl">
+        <h1 class="mt-6 text-3xl font-extrabold tracking-tight text-flame sm:text-4xl lg:text-5xl">
           {post.data.title}
         </h1>
-        <div class="mt-4 flex flex-wrap items-center gap-3 text-sm text-steel-400">
+        <div class="mt-4 flex flex-wrap items-center gap-3 text-sm text-gold-600">
           <span>{post.data.author}</span>
           <span aria-hidden="true">&middot;</span>
           <time datetime={post.data.date.toISOString()}>
@@ -44,7 +44,7 @@ const { Content } = await render(post);
             <>
               <span aria-hidden="true">&middot;</span>
               {post.data.tags.map((tag) => (
-                <span class="rounded-full bg-steel-800 px-2.5 py-0.5 text-xs font-medium text-steel-300">
+                <span class="rounded-full bg-dark-800 px-2.5 py-0.5 text-xs font-medium text-gold-600">
                   {tag}
                 </span>
               ))}
@@ -59,8 +59,8 @@ const { Content } = await render(post);
       </div>
 
       <!-- Post footer -->
-      <footer class="mt-16 border-t border-steel-800 pt-8">
-        <a href="/blog" class="text-sm font-medium text-rust-400 transition-colors hover:text-ember">
+      <footer class="mt-16 border-t border-dark-700 pt-8">
+        <a href="/blog" class="text-sm font-medium text-flame transition-colors hover:text-flame-300">
           &larr; Back to all posts
         </a>
       </footer>
