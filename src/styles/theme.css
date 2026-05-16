@@ -1,0 +1,102 @@
+/*
+  RustLoop Brand Theme
+  #111111 — background
+  #ffbd39 — body text (gold)
+  #f5793b — headlines, highlights, links (flame)
+*/
+
+:root {
+	/* --- Colors --- */
+	--color-bg: #111111;
+	--color-text: #ffbd39;
+	--color-muted: #cc9730;
+	--color-border: #2a2a2a;
+	--color-surface: #1a1a1a;
+	--color-primary: #f5793b;
+	--color-primary-dark: #d4612a;
+	--color-primary-light: #f89a6a;
+	--color-accent: #ffbd39;
+	--color-accent-light: #ffcd6a;
+	--color-success: #22c55e;
+	--color-warning: #f59e0b;
+}
+
+/* Force dark mode to use the same brand palette — no light/dark toggle needed */
+@media (prefers-color-scheme: dark) {
+	:root:not(.light) {
+		--color-bg: #111111;
+		--color-text: #ffbd39;
+		--color-muted: #cc9730;
+		--color-border: #2a2a2a;
+		--color-surface: #1a1a1a;
+		--color-primary: #f5793b;
+		--color-primary-dark: #d4612a;
+		--color-primary-light: #f89a6a;
+	}
+}
+
+:root.dark {
+	--color-bg: #111111;
+	--color-text: #ffbd39;
+	--color-muted: #cc9730;
+	--color-border: #2a2a2a;
+	--color-surface: #1a1a1a;
+	--color-primary: #f5793b;
+	--color-primary-dark: #d4612a;
+	--color-primary-light: #f89a6a;
+}
+
+/* Override heading gradient to use flame color */
+h1, h2, h3, h4, h5, h6 {
+	color: #f5793b;
+}
+
+/* Override the hero headline gradient */
+.hero-headline {
+	background: linear-gradient(135deg, #f5793b 0%, #ffbd39 100%) !important;
+	-webkit-background-clip: text !important;
+	-webkit-text-fill-color: transparent !important;
+	background-clip: text !important;
+}
+
+/* Primary buttons: flame bg with dark text for contrast */
+.btn-primary {
+	color: #111111 !important;
+	background: #f5793b !important;
+}
+
+.btn-primary:hover {
+	background: #f89a6a !important;
+}
+
+/* Nav CTA button */
+.nav-cta {
+	color: #111111 !important;
+	background: #f5793b !important;
+}
+
+.nav-cta:hover {
+	background: #f89a6a !important;
+}
+
+/* Site logo image — larger */
+.site-logo-img {
+	height: 64px !important;
+	margin: -16px 0 !important;
+}
+
+.footer-logo-img {
+	height: 40px !important;
+}
+
+/* Links in footer columns */
+.footer-col a:hover {
+	color: #f5793b;
+}
+
+/* Ember glow on interactive cards */
+.feature-card:hover,
+.testimonial-card:hover {
+	border-color: rgba(245, 121, 59, 0.3);
+	box-shadow: 0 0 20px rgba(245, 121, 59, 0.1);
+}

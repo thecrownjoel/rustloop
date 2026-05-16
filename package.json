@@ -1,22 +1,39 @@
 {
-  "name": "rustloop-temp",
+  "name": "rustloop",
+  "version": "0.0.3",
+  "private": true,
   "type": "module",
-  "version": "0.0.1",
-  "engines": {
-    "node": ">=22.12.0"
+  "emdash": {
+    "label": "Marketing",
+    "seed": "seed/seed.json"
   },
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "deploy": "astro build && wrangler deploy",
+    "typecheck": "astro check"
   },
   "dependencies": {
-    "@astrojs/mdx": "^5.0.6",
-    "@astrojs/sitemap": "^3.7.2",
-    "@tailwindcss/typography": "^0.5.19",
-    "@tailwindcss/vite": "^4.3.0",
-    "astro": "^6.3.3",
-    "tailwindcss": "^4.3.0"
+    "@astrojs/cloudflare": "^13.1.7",
+    "@astrojs/react": "^5.0.0",
+    "@emdash-cms/cloudflare": "^0.12.0",
+    "@iconify-json/ph": "^1.2.2",
+    "astro": "^6.0.1",
+    "astro-iconset": "^0.0.4",
+    "emdash": "^0.12.0",
+    "react": "19.2.4",
+    "react-dom": "19.2.4"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.7",
+    "@cloudflare/workers-types": "^4.20260305.1",
+    "wrangler": "^4.83.0"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild",
+      "workerd"
+    ]
   }
 }

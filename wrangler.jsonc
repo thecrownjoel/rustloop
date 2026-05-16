@@ -1,0 +1,26 @@
+{
+	"$schema": "node_modules/wrangler/config-schema.json",
+	"name": "rustloop",
+	"main": "./src/worker.ts",
+	"compatibility_date": "2026-02-24",
+	"compatibility_flags": ["nodejs_compat"],
+	"d1_databases": [
+		{
+			"binding": "DB",
+			"database_name": "rustloop-db",
+			"database_id": "16c3ad9a-0893-48c2-b5ff-e103bbe53728"
+		}
+	],
+	"r2_buckets": [
+		{
+			"binding": "MEDIA",
+			"bucket_name": "rustloop-media"
+		}
+	],
+	// Worker Loader for plugin sandboxing (requires paid plan)
+	// "worker_loaders": [
+	// 	{
+	// 		"binding": "LOADER"
+	// 	}
+	// ]
+}

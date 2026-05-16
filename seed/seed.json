@@ -1,0 +1,255 @@
+{
+	"$schema": "https://emdashcms.com/seed.schema.json",
+	"version": "1",
+	"meta": {
+		"name": "RustLoop",
+		"description": "AI/ML community connecting Youngstown, Cleveland, and Pittsburgh",
+		"author": "RustLoop"
+	},
+	"settings": {
+		"title": "RustLoop",
+		"tagline": "From the ashes of Steel City rust to the future of Artificial Intelligence"
+	},
+	"collections": [
+		{
+			"slug": "pages",
+			"label": "Pages",
+			"labelSingular": "Page",
+			"supports": ["drafts", "revisions", "seo"],
+			"fields": [
+				{
+					"slug": "title",
+					"label": "Title",
+					"type": "string",
+					"required": true
+				},
+				{
+					"slug": "content",
+					"label": "Content",
+					"type": "portableText"
+				}
+			]
+		},
+		{
+			"slug": "posts",
+			"label": "Blog Posts",
+			"labelSingular": "Post",
+			"supports": ["drafts", "revisions", "seo", "taxonomies"],
+			"fields": [
+				{
+					"slug": "title",
+					"label": "Title",
+					"type": "string",
+					"required": true
+				},
+				{
+					"slug": "excerpt",
+					"label": "Excerpt",
+					"type": "string"
+				},
+				{
+					"slug": "content",
+					"label": "Content",
+					"type": "portableText"
+				}
+			]
+		},
+		{
+			"slug": "events",
+			"label": "Events",
+			"labelSingular": "Event",
+			"supports": ["drafts", "revisions"],
+			"fields": [
+				{
+					"slug": "title",
+					"label": "Title",
+					"type": "string",
+					"required": true
+				},
+				{
+					"slug": "date",
+					"label": "Date",
+					"type": "string"
+				},
+				{
+					"slug": "location",
+					"label": "Location",
+					"type": "string"
+				},
+				{
+					"slug": "description",
+					"label": "Description",
+					"type": "portableText"
+				}
+			]
+		}
+	],
+	"menus": [
+		{
+			"name": "primary",
+			"label": "Primary Navigation",
+			"items": [
+				{
+					"type": "custom",
+					"label": "About",
+					"url": "/about"
+				},
+				{
+					"type": "custom",
+					"label": "Blog",
+					"url": "/blog"
+				},
+				{
+					"type": "custom",
+					"label": "Events",
+					"url": "/events"
+				}
+			]
+		},
+		{
+			"name": "footer_product",
+			"label": "Footer: Community",
+			"items": [
+				{ "type": "custom", "label": "About", "url": "/about" },
+				{ "type": "custom", "label": "Events", "url": "/events" },
+				{ "type": "custom", "label": "Blog", "url": "/blog" }
+			]
+		},
+		{
+			"name": "footer_company",
+			"label": "Footer: Cities",
+			"items": [
+				{ "type": "custom", "label": "Youngstown, OH", "url": "/about" },
+				{ "type": "custom", "label": "Cleveland, OH", "url": "/about" },
+				{ "type": "custom", "label": "Pittsburgh, PA", "url": "/about" }
+			]
+		},
+		{
+			"name": "footer_support",
+			"label": "Footer: Connect",
+			"items": [
+				{ "type": "custom", "label": "Contact", "url": "mailto:hello@rustloop.ai" },
+				{ "type": "custom", "label": "Join", "url": "/signup" }
+			]
+		}
+	],
+	"content": {
+		"pages": [
+			{
+				"id": "home",
+				"slug": "home",
+				"status": "published",
+				"data": {
+					"title": "Home",
+					"content": [
+						{
+							"_type": "marketing.hero",
+							"_key": "hero",
+							"headline": "From the ashes of Steel City rust to the future of Artificial Intelligence",
+							"subheadline": "Youngstown, Cleveland, and Pittsburgh produced the steel that built this country. It provided a life and a future for generations of families — but that era had an expiration date. What didn't expire was the people. RustLoop brings together the best minds working on AI and opens the doors so the public can listen in.",
+							"primaryCtaLabel": "Join the Community",
+							"primaryCtaUrl": "/signup",
+							"secondaryCtaLabel": "Upcoming Events",
+							"secondaryCtaUrl": "/events"
+						},
+						{
+							"_type": "marketing.features",
+							"_key": "features",
+							"headline": "Three Cities, One Mission",
+							"subheadline": "Some of the sharpest, most resilient minds in America live along the corridor connecting our three cities. Youngstown may stay divided over sports, but our roots run deeper than any rivalry.",
+							"features": [
+								{
+									"icon": "users",
+									"title": "Meetups",
+									"description": "Monthly gatherings rotating between Youngstown, Cleveland, and Pittsburgh. Practitioners sharing real work, not slide decks."
+								},
+								{
+									"icon": "lightning",
+									"title": "Technical Talks",
+									"description": "From practitioners, not evangelists. Deep dives into models, infrastructure, and the craft of building with AI."
+								},
+								{
+									"icon": "chart",
+									"title": "Study Groups",
+									"description": "Papers, frameworks, new tools. We read them, break them down, and figure out what actually matters."
+								},
+								{
+									"icon": "globe",
+									"title": "Open Doors",
+									"description": "This region helped power the last industrial revolution. We intend to help power the next one — and everyone's invited."
+								},
+								{
+									"icon": "heart",
+									"title": "Community First",
+									"description": "No gatekeeping. No hype cycles. Just people doing the work and helping each other get better."
+								},
+								{
+									"icon": "sparkle",
+									"title": "The Next Revolution",
+									"description": "Our country is welcoming a transformation we haven't seen since the advent of electricity. The Rust Belt will be part of it."
+								}
+							]
+						},
+						{
+							"_type": "marketing.faq",
+							"_key": "faq",
+							"headline": "Common Questions",
+							"items": [
+								{
+									"question": "Who is RustLoop for?",
+									"answer": "Anyone interested in AI and machine learning — data scientists, ML engineers, researchers, students, hobbyists, and the simply curious. Whether you're training models at work or tinkering on weekends, you belong here."
+								},
+								{
+									"question": "Where do meetups happen?",
+									"answer": "We rotate between Youngstown, Cleveland, and Pittsburgh. Locations are announced on the events page and through our mailing list."
+								},
+								{
+									"question": "How do I get involved?",
+									"answer": "Sign up for an account, attend a meetup, or just start reading the blog. There's no application process — show up and be part of it."
+								},
+								{
+									"question": "Is there a cost?",
+									"answer": "RustLoop is free to join. We're a community organization, not a business. Some events may have nominal venue costs, but we work to keep everything accessible."
+								}
+							]
+						}
+					]
+				}
+			},
+			{
+				"id": "about",
+				"slug": "about",
+				"status": "published",
+				"data": {
+					"title": "About",
+					"content": [
+						{
+							"_type": "marketing.hero",
+							"_key": "about-hero",
+							"headline": "About RustLoop",
+							"subheadline": "[TODO: copy — to be written. The full story of RustLoop, its mission, and the community it serves.]",
+							"centered": true
+						}
+					]
+				}
+			},
+			{
+				"id": "events",
+				"slug": "events",
+				"status": "published",
+				"data": {
+					"title": "Events",
+					"content": [
+						{
+							"_type": "marketing.hero",
+							"_key": "events-hero",
+							"headline": "Upcoming Meetups",
+							"subheadline": "Monthly gatherings rotating between Youngstown, Cleveland, and Pittsburgh. Check back for dates and locations.",
+							"centered": true
+						}
+					]
+				}
+			}
+		]
+	}
+}
