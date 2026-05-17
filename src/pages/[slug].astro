@@ -22,32 +22,115 @@ const pageContent = page.data.content;
 ---
 
 <Base title={pageTitle} description={page.data.excerpt}>
-	{
-		pageContent ? (
-			<MarketingBlocks value={pageContent} />
-		) : (
-			<div class="empty-state">
-				<h1>{pageTitle}</h1>
-				<p>Content coming soon.</p>
-			</div>
-		)
-	}
+	<article class="page">
+		<header class="page-header">
+			<h1>{pageTitle}</h1>
+			{page.data.excerpt && <p class="lead">{page.data.excerpt}</p>}
+		</header>
+
+		<div class="prose">
+			{
+				pageContent ? (
+					<MarketingBlocks value={pageContent} />
+				) : (
+					<p class="empty">Content coming soon.</p>
+				)
+			}
+		</div>
+	</article>
 </Base>
 
 <style>
-	.empty-state {
-		text-align: center;
-		padding: var(--spacing-5xl) var(--spacing-lg);
+	.page {
 		max-width: var(--max-width);
 		margin: 0 auto;
+		padding: var(--spacing-3xl) var(--spacing-lg);
 	}
 
-	.empty-state h1 {
+	.page-header {
+		text-align: center;
+		margin-bottom: var(--spacing-2xl);
+	}
+
+	.page-header h1 {
+		margin-bottom: var(--spacing-sm);
+		color: #f5793b;
+	}
+
+	.lead {
+		font-size: 1.125rem;
+		color: var(--color-muted, #ffbd39);
+		font-style: italic;
+	}
+
+	.prose :global(p) {
 		margin-bottom: var(--spacing-md);
+		line-height: 1.7;
 	}
 
-	.empty-state p {
+	.prose :global(p:empty) {
+		display: none;
+	}
+
+	.prose :global(h2) {
+		font-size: 1.75rem;
+		margin-top: var(--spacing-2xl);
+		margin-bottom: var(--spacing-md);
+		color: #f5793b;
+	}
+
+	.prose :global(h3) {
+		font-size: 1.375rem;
+		margin-top: var(--spacing-xl);
+		margin-bottom: var(--spacing-sm);
+		color: #f5793b;
+	}
+
+	.prose :global(strong) {
+		color: #ffbd39;
+		font-weight: 700;
+	}
+
+	.prose :global(a) {
+		color: #f5793b;
+		text-decoration: underline;
+		text-decoration-color: rgba(245, 121, 59, 0.4);
+	}
+
+	.prose :global(a:hover) {
+		text-decoration-color: #f5793b;
+	}
+
+	.prose :global(ul),
+	.prose :global(ol) {
+		margin-bottom: var(--spacing-md);
+		padding-left: var(--spacing-xl);
+	}
+
+	.prose :global(li) {
+		margin-bottom: var(--spacing-xs);
+		line-height: 1.7;
+	}
+
+	.prose :global(blockquote) {
+		border-left: 3px solid #f5793b;
+		padding-left: var(--spacing-lg);
+		margin: var(--spacing-xl) 0;
+		font-style: italic;
 		color: var(--color-muted);
-		margin-bottom: var(--spacing-xl);
+	}
+
+	.prose :global(code) {
+		background: rgba(255, 189, 57, 0.1);
+		padding: 0.125em 0.375em;
+		border-radius: 4px;
+		font-family: var(--font-mono);
+		font-size: 0.9em;
+	}
+
+	.empty {
+		text-align: center;
+		color: var(--color-muted);
+		padding: var(--spacing-3xl) 0;
 	}
 </style>
