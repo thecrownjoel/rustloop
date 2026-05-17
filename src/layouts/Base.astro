@@ -1,6 +1,6 @@
 ---
-import { getMenu, getSiteSettings } from "emdash";
-import { EmDashHead } from "emdash/ui";
+import { getMenu, getSiteSettings, getEmDashCollection } from "emdash";
+import { EmDashHead, Image } from "emdash/ui";
 import { createPublicPageContext } from "emdash/page";
 import { Font } from "astro:assets";
 import "../styles/theme.css";
@@ -20,12 +20,21 @@ const siteDescription =
 const siteLogo = (settings?.logo as any)?.url ? settings.logo as
 	{ mediaId: string; alt?: string; url: string } : null;
 
-const [menu, footerProduct, footerCompany, footerSupport] = await Promise.all([
+const [menu, footerProduct, footerCompany, footerSupport, sponsorsResult] = await Promise.all([
 	getMenu("primary"),
 	getMenu("footer_product"),
 	getMenu("footer_company"),
 	getMenu("footer_support"),
+	getEmDashCollection("sponsors", { status: "published" }).catch(() => ({ entries: [] })),
 ]);
+
+// Sort sponsors by display order, lower numbers first. Entries without a
+// sortOrder go to the bottom but stay in their relative DB order.
+const sponsors = [...(sponsorsResult.entries ?? [])].sort((a: any, b: any) => {
+	const aOrder = a.data.sortOrder ?? Number.MAX_SAFE_INTEGER;
+	const bOrder = b.data.sortOrder ?? Number.MAX_SAFE_INTEGER;
+	return aOrder - bOrder;
+});
 
 const footerColumns = [
 	{ heading: "Community", menu: footerProduct },
@@ -100,9 +109,37 @@ const pageCtx = createPublicPageContext({
 			<div class="sponsors-inner">
 				<h3 class="sponsors-heading">Sponsors</h3>
 				<div class="sponsors-grid">
-					<a href="https://45press.com" target="_blank" rel="noopener noreferrer" class="sponsor-link" aria-label="45Press">
-						<img src="/sponsors/45press-gold.svg" alt="45Press" class="sponsor-logo" width="240" height="57" />
-					</a>
+					{sponsors.length > 0 ? (
+						sponsors.map((sponsor: any) => (
+							<a
+								href={sponsor.data.websiteUrl}
+								target="_blank"
+								rel="noopener noreferrer"
+								class="sponsor-link"
+								aria-label={sponsor.data.name}
+							>
+								{sponsor.data.logo && (
+									<Image image={sponsor.data.logo} class="sponsor-logo" />
+								)}
+							</a>
+						))
+					) : (
+						<a
+							href="https://45press.com"
+							target="_blank"
+							rel="noopener noreferrer"
+							class="sponsor-link"
+							aria-label="45Press"
+						>
+							<img
+								src="/sponsors/45press-gold.svg"
+								alt="45Press"
+								class="sponsor-logo"
+								width="240"
+								height="57"
+							/>
+						</a>
+					)}
 				</div>
 			</div>
 		</section>
