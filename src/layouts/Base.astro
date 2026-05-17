@@ -1,6 +1,6 @@
 ---
-import { getMenu, getSiteSettings, getEmDashCollection } from "emdash";
-import { EmDashHead, Image } from "emdash/ui";
+import { getMenu, getSiteSettings, getWidgetArea } from "emdash";
+import { EmDashHead, PortableText } from "emdash/ui";
 import { createPublicPageContext } from "emdash/page";
 import { Font } from "astro:assets";
 import "../styles/theme.css";
@@ -20,21 +20,18 @@ const siteDescription =
 const siteLogo = (settings?.logo as any)?.url ? settings.logo as
 	{ mediaId: string; alt?: string; url: string } : null;
 
-const [menu, footerProduct, footerCompany, footerSupport, sponsorsResult] = await Promise.all([
+const [menu, footerProduct, footerCompany, footerSupport, sponsorsArea] = await Promise.all([
 	getMenu("primary"),
 	getMenu("footer_product"),
 	getMenu("footer_company"),
 	getMenu("footer_support"),
-	getEmDashCollection("sponsors", { status: "published" }).catch(() => ({ entries: [] })),
+	getWidgetArea("sponsors").catch(() => null),
 ]);
 
-// Sort sponsors by display order, lower numbers first. Entries without a
-// sortOrder go to the bottom but stay in their relative DB order.
-const sponsors = [...(sponsorsResult.entries ?? [])].sort((a: any, b: any) => {
-	const aOrder = a.data.sortOrder ?? Number.MAX_SAFE_INTEGER;
-	const bOrder = b.data.sortOrder ?? Number.MAX_SAFE_INTEGER;
-	return aOrder - bOrder;
-});
+// Each widget in the "sponsors" area is rendered as one sponsor.
+// Editors add a Content widget per sponsor with a linked image
+// inserted from the media library.
+const sponsorWidgets = sponsorsArea?.widgets?.filter((w: any) => w.type === "content" && w.content) ?? [];
 
 const footerColumns = [
 	{ heading: "Community", menu: footerProduct },
@@ -109,19 +106,11 @@ const pageCtx = createPublicPageContext({
 			<div class="sponsors-inner">
 				<h3 class="sponsors-heading">Sponsors</h3>
 				<div class="sponsors-grid">
-					{sponsors.length > 0 ? (
-						sponsors.map((sponsor: any) => (
-							<a
-								href={sponsor.data.websiteUrl}
-								target="_blank"
-								rel="noopener noreferrer"
-								class="sponsor-link"
-								aria-label={sponsor.data.name}
-							>
-								{sponsor.data.logo && (
-									<Image image={sponsor.data.logo} class="sponsor-logo" />
-								)}
-							</a>
+					{sponsorWidgets.length > 0 ? (
+						sponsorWidgets.map((widget: any) => (
+							<div class="sponsor-widget" aria-label={widget.title}>
+								<PortableText value={widget.content} />
+							</div>
 						))
 					) : (
 						<a

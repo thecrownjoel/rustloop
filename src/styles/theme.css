@@ -348,6 +348,31 @@ h1, h2, h3, h4, h5, h6 {
 	display: block;
 }
 
+/* Sponsor widgets — each widget renders a linked image from the media library */
+.sponsor-widget {
+	display: inline-flex;
+	align-items: center;
+}
+
+.sponsor-widget :global(p) {
+	margin: 0;
+}
+
+.sponsor-widget :global(a) {
+	display: inline-block;
+	transition: opacity 0.2s ease;
+}
+
+.sponsor-widget :global(a:hover) {
+	opacity: 0.8;
+}
+
+.sponsor-widget :global(img) {
+	height: 60px;
+	width: auto;
+	display: block;
+}
+
 /* --- Molten steel canvas --- */
 #molten-canvas {
 	position: fixed;
