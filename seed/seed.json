@@ -82,6 +82,37 @@
 					"type": "portableText"
 				}
 			]
+		},
+		{
+			"slug": "sponsors",
+			"label": "Sponsors",
+			"labelSingular": "Sponsor",
+			"supports": ["drafts"],
+			"fields": [
+				{
+					"slug": "name",
+					"label": "Name",
+					"type": "string",
+					"required": true
+				},
+				{
+					"slug": "websiteUrl",
+					"label": "Website URL",
+					"type": "string",
+					"required": true
+				},
+				{
+					"slug": "logo",
+					"label": "Logo",
+					"type": "image",
+					"required": true
+				},
+				{
+					"slug": "sortOrder",
+					"label": "Display Order (lower shows first)",
+					"type": "integer"
+				}
+			]
 		}
 	],
 	"menus": [
