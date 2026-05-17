@@ -1,5 +1,91 @@
 # RustLoop — Current Progress
 
+---
+
+## Session 2 — 2026-05-17 (~02:00 - 03:40 AM EDT)
+
+### What Was Done
+
+**Blog system (live):**
+- Built `src/pages/blog/index.astro` — server-rendered list of published posts (`getEmDashCollection("posts", { status: "published" })`), sorted by `publishedAt` desc
+- Built `src/pages/blog/[slug].astro` — server-rendered post detail with PortableText body, byline, date
+- Added byline rendering on both pages — reads `post.data.byline.displayName` (EmDash auto-populates from post author)
+- Commits: `8463500`, `41f115d`
+
+**Catch-all admin pages (live):**
+- Built `src/pages/[slug].astro` — auto-renders any `pages` collection entry by slug (e.g. `/team`, future admin pages)
+- Added prose typography (paragraphs, h2/h3, strong, links, lists, blockquotes, code) styled with site palette
+- Empty `<p></p>` lines preserved as visual spacers (editors use them to space sections like team bios)
+- Commits: `1927d9e`, `32dbc0f`, `f4527bd`
+
+**Sponsor logo (live):**
+- Replaced the invisible inline-SVG sponsor with `<img src="/sponsors/45press-gold.svg">` — clean standalone SVG with `style="fill:#ffbd39"` at root
+- Bypassed whatever Astro scoping was hiding the inline version
+- Commit: `8463500`
+
+**Nav header sizing (live):**
+- Was: 128px logo with `-24px` vertical margin popping out of an under-sized header (visible mismatch)
+- Now: header has `0.5rem` top/bottom padding, logo margin removed — logo sits cleanly inside ~144px-tall nav
+- Commit: `61c0e82`
+
+**Sponsors → CMS-managed (live, pending admin setup):**
+- First tried: a `sponsors` content collection (required user to create schema in admin)
+- Pivoted to: `getWidgetArea("sponsors")` — uses EmDash's built-in widget system. Each Content widget = one sponsor. Editor inserts image from media library and wraps with link.
+- Hardcoded 45Press fallback kept for empty/missing widget area
+- **User must do:** create widget area named `sponsors` at `/_emdash/admin/widgets`, add Content widgets per sponsor with linked images from media library
+- Commits: `08cd8e6`, `2dd27ca`, `1af7485`
+
+**Cloudflare cache auto-purge plugin (deployed, awaiting token):**
+- Native EmDash plugin: `src/plugins/cf-cache-purge/`
+- Hooks: `content:afterSave`, `content:afterPublish`, `content:afterUnpublish`, `content:afterDelete`
+- Each calls `POST https://api.cloudflare.com/client/v4/zones/{zoneId}/purge_cache` with `{ purge_everything: true }`
+- Reads `CF_PURGE_TOKEN` from env (Worker secret), `CF_ZONE_ID` from `wrangler.jsonc` vars (already set: `1c33402086210619ecb9cac2aa284c51`)
+- Falls back to KV settings (`settings:apiToken`, `settings:zoneId`) as override
+- Failures logged and swallowed — never blocks a content save
+- **User must do:** Create scoped CF token (`Zone.Cache Purge` on rustloop.ai) → `wrangler secret put CF_PURGE_TOKEN`
+- Capabilities: `network:request`, `allowedHosts: ["api.cloudflare.com"]`
+- Initial build failed deploy (`createPlugin` not exported); fixed by matching marketing-blocks export pattern
+- Commits: `78beb78`, `ae0b8f9`, `6e159d2`
+
+**Other:**
+- Updated seed `Contact` menu link to `mailto:rustloop@45press.com` (live menu in D1 still has old `hello@rustloop.ai`; user must update in admin)
+- Added `Bash(git push origin main)` to `.claude/settings.local.json` so Claude can deploy directly
+- Added contact-email memory at `~/.claude/projects/-Users-joel-Projects-rustloop/memory/project_contact_email.md`
+
+### Key Decisions / Reversals
+
+- **Admin branding:** Cannot swap the EmDash logo on `/_emdash/admin/*` without forking — no built-in hook. Recommended filing upstream feature request; skipped for now.
+- **Sponsors implementation:** First built as collection (required schema UI navigation user couldn't find), then tried building custom React plugin admin page (bundling for inline plugins is non-trivial), then proposed REST API approach with admin token, finally landed on widget areas (built-in, no schema needed).
+
+### Pending User Actions
+
+| Action | Where |
+| --- | --- |
+| Create scoped CF cache-purge token, run `wrangler secret put CF_PURGE_TOKEN` | CF dashboard + local terminal |
+| Rotate the exposed CF API token from Session 1 | CF dashboard |
+| Fix blog post: full article body is in **Title** field, move to **Content**, set a proper title | Admin → Posts |
+| Set byline display name (otherwise "By..." shows blank/email) | Admin → People/Bylines |
+| Add content to `/team` page (currently empty) | Admin → Pages → Team |
+| Create `sponsors` widget area + add Content widgets per sponsor | Admin → `/_emdash/admin/widgets` |
+| Update Footer Contact link to `rustloop@45press.com` | Admin → Menus → Footer: Connect |
+
+### Pending Decisions
+
+- **User profiles broader fix:** A) set just your own byline / B) build a `/profile` page where signed-in users edit their own byline / C) customize signup to require display name upfront. Recommended B.
+- Open EmDash admin-branding feature request on GitHub? (drafted, not posted)
+- Delete `/pricing` and `/contact` template pages?
+- About page rewrite (currently duplicates homepage) — need new copy
+
+### Useful URLs / IDs (no secrets)
+
+- CF Zone ID: `1c33402086210619ecb9cac2aa284c51` (now also in `wrangler.jsonc` `vars`)
+- CF Account (deploys): `Joel@45press.com's Account` — `ece401f47370ecab76cbc85bf2a7054c`
+- Latest deployed commit: `1af7485`
+
+---
+
+## Session 1 — 2026-05-16
+
 **Date:** 2026-05-16
 **Session time:** ~12:00 AM - 3:47 AM EST
 
