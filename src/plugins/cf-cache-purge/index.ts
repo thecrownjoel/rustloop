@@ -129,4 +129,8 @@ const definition: PluginDefinition = {
 	},
 };
 
-export default definePlugin(definition);
+export function createPlugin() {
+	return definePlugin(definition);
+}
+
+export default createPlugin;
