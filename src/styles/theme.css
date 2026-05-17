@@ -98,11 +98,12 @@ h1, h2, h3, h4, h5, h6 {
 	backdrop-filter: blur(8px);
 	-webkit-backdrop-filter: blur(8px);
 	border-bottom-color: #2a2a2a !important;
+	padding: 0.5rem 0 !important;
 }
 
 .site-logo-img {
 	height: 128px !important;
-	margin: -24px 0 !important;
+	margin: 0 !important;
 }
 
 .nav-links a {
