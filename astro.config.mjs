@@ -61,6 +61,11 @@ export default defineConfig({
 					// the virtual module has no on-disk location to anchor them).
 					entrypoint: new URL("./src/plugins/marketing-blocks/index.ts", import.meta.url).href,
 				},
+				{
+					id: "cf-cache-purge",
+					version: "0.1.0",
+					entrypoint: new URL("./src/plugins/cf-cache-purge/index.ts", import.meta.url).href,
+				},
 			],
 		}),
 	],
