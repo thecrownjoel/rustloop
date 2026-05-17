@@ -64,12 +64,13 @@ const pageContent = page.data.content;
 	}
 
 	.prose :global(p) {
-		margin-bottom: var(--spacing-md);
+		margin-bottom: var(--spacing-lg);
 		line-height: 1.7;
 	}
 
 	.prose :global(p:empty) {
-		display: none;
+		margin-bottom: var(--spacing-lg);
+		min-height: 1rem;
 	}
 
 	.prose :global(h2) {
