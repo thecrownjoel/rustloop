@@ -39,15 +39,20 @@ const sortedPosts = [...posts].sort((a, b) => {
 							<a href={`/blog/${post.id}`} class="post-link">
 								<h2>{post.data.title}</h2>
 								{post.data.excerpt && <p class="excerpt">{post.data.excerpt}</p>}
-								{post.data.publishedAt && (
-									<time datetime={new Date(post.data.publishedAt).toISOString()}>
-										{new Date(post.data.publishedAt).toLocaleDateString(undefined, {
-											year: "numeric",
-											month: "long",
-											day: "numeric",
-										})}
-									</time>
-								)}
+								<div class="post-meta">
+									{post.data.byline && (
+										<span class="byline">By {post.data.byline.displayName}</span>
+									)}
+									{post.data.publishedAt && (
+										<time datetime={new Date(post.data.publishedAt).toISOString()}>
+											{new Date(post.data.publishedAt).toLocaleDateString(undefined, {
+												year: "numeric",
+												month: "long",
+												day: "numeric",
+											})}
+										</time>
+									)}
+								</div>
 							</a>
 						</li>
 					))}
@@ -116,9 +121,22 @@ const sortedPosts = [...posts].sort((a, b) => {
 		margin: 0 0 var(--spacing-sm);
 	}
 
-	time {
+	.post-meta {
+		display: flex;
+		gap: var(--spacing-md);
+		align-items: center;
+		flex-wrap: wrap;
 		font-size: 0.875rem;
 		color: var(--color-muted);
+		opacity: 0.8;
+	}
+
+	.byline {
+		color: #f5793b;
+		font-weight: 500;
+	}
+
+	time {
 		opacity: 0.7;
 	}
 

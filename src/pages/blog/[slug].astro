@@ -24,8 +24,11 @@ const publishedAt = post.data.publishedAt ? new Date(post.data.publishedAt) : nu
 	<article class="post">
 		<header class="post-header">
 			<h1>{post.data.title}</h1>
-			{
-				publishedAt && (
+			<div class="post-meta">
+				{post.data.byline && (
+					<span class="byline">By {post.data.byline.displayName}</span>
+				)}
+				{publishedAt && (
 					<time datetime={publishedAt.toISOString()}>
 						{publishedAt.toLocaleDateString(undefined, {
 							year: "numeric",
@@ -33,8 +36,8 @@ const publishedAt = post.data.publishedAt ? new Date(post.data.publishedAt) : nu
 							day: "numeric",
 						})}
 					</time>
-				)
-			}
+				)}
+			</div>
 		</header>
 
 		{post.data.excerpt && <p class="lead">{post.data.excerpt}</p>}
@@ -64,9 +67,22 @@ const publishedAt = post.data.publishedAt ? new Date(post.data.publishedAt) : nu
 		color: #f5793b;
 	}
 
-	.post-header time {
+	.post-meta {
+		display: flex;
+		gap: var(--spacing-md);
+		justify-content: center;
+		align-items: center;
+		flex-wrap: wrap;
 		font-size: 0.875rem;
 		color: var(--color-muted);
+	}
+
+	.byline {
+		color: #f5793b;
+		font-weight: 500;
+	}
+
+	.post-header time {
 		opacity: 0.7;
 	}
 
