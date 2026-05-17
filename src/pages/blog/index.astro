@@ -1,0 +1,130 @@
+---
+import { getEmDashCollection } from "emdash";
+import Base from "../../layouts/Base.astro";
+
+const { entries: posts, error } = await getEmDashCollection("posts", {
+	status: "published",
+});
+
+if (error) {
+	console.error("Failed to load posts:", error);
+}
+
+const sortedPosts = [...posts].sort((a, b) => {
+	const aTime = a.data.publishedAt ? new Date(a.data.publishedAt).getTime() : 0;
+	const bTime = b.data.publishedAt ? new Date(b.data.publishedAt).getTime() : 0;
+	return bTime - aTime;
+});
+---
+
+<Base
+	title="Blog"
+	description="News, dispatches, and field notes from the RustLoop AI community across Youngstown, Cleveland, and Pittsburgh."
+>
+	<section class="blog-index">
+		<header class="blog-header">
+			<h1>Blog</h1>
+			<p>Dispatches from the loop.</p>
+		</header>
+
+		{
+			sortedPosts.length === 0 ? (
+				<div class="empty-state">
+					<p>No posts yet. Check back soon.</p>
+				</div>
+			) : (
+				<ul class="post-list">
+					{sortedPosts.map((post) => (
+						<li class="post-item">
+							<a href={`/blog/${post.id}`} class="post-link">
+								<h2>{post.data.title}</h2>
+								{post.data.excerpt && <p class="excerpt">{post.data.excerpt}</p>}
+								{post.data.publishedAt && (
+									<time datetime={new Date(post.data.publishedAt).toISOString()}>
+										{new Date(post.data.publishedAt).toLocaleDateString(undefined, {
+											year: "numeric",
+											month: "long",
+											day: "numeric",
+										})}
+									</time>
+								)}
+							</a>
+						</li>
+					))}
+				</ul>
+			)
+		}
+	</section>
+</Base>
+
+<style>
+	.blog-index {
+		max-width: var(--max-width);
+		margin: 0 auto;
+		padding: var(--spacing-3xl) var(--spacing-lg);
+	}
+
+	.blog-header {
+		text-align: center;
+		margin-bottom: var(--spacing-3xl);
+	}
+
+	.blog-header h1 {
+		margin-bottom: var(--spacing-sm);
+	}
+
+	.blog-header p {
+		color: var(--color-muted);
+	}
+
+	.post-list {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+		display: grid;
+		gap: var(--spacing-xl);
+	}
+
+	.post-item {
+		border-top: 1px solid rgba(255, 189, 57, 0.15);
+		padding-top: var(--spacing-xl);
+	}
+
+	.post-item:first-child {
+		border-top: none;
+		padding-top: 0;
+	}
+
+	.post-link {
+		display: block;
+		text-decoration: none;
+		color: inherit;
+	}
+
+	.post-link h2 {
+		margin: 0 0 var(--spacing-sm);
+		color: #f5793b;
+		transition: color 0.2s ease;
+	}
+
+	.post-link:hover h2 {
+		color: #ffbd39;
+	}
+
+	.excerpt {
+		color: var(--color-muted, #ffbd39);
+		margin: 0 0 var(--spacing-sm);
+	}
+
+	time {
+		font-size: 0.875rem;
+		color: var(--color-muted);
+		opacity: 0.7;
+	}
+
+	.empty-state {
+		text-align: center;
+		padding: var(--spacing-3xl) var(--spacing-lg);
+		color: var(--color-muted);
+	}
+</style>

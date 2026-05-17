@@ -128,7 +128,7 @@
 			"name": "footer_support",
 			"label": "Footer: Connect",
 			"items": [
-				{ "type": "custom", "label": "Contact", "url": "mailto:hello@rustloop.ai" },
+				{ "type": "custom", "label": "Contact", "url": "mailto:rustloop@45press.com" },
 				{ "type": "custom", "label": "Join", "url": "/signup" }
 			]
 		}

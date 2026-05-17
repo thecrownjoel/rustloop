@@ -1,0 +1,95 @@
+---
+import { getEmDashEntry } from "emdash";
+import { PortableText } from "emdash/ui";
+import Base from "../../layouts/Base.astro";
+
+const { slug } = Astro.params;
+
+if (!slug) {
+	return Astro.redirect("/404");
+}
+
+const { entry: post, cacheHint } = await getEmDashEntry("posts", slug);
+
+if (!post) {
+	return Astro.redirect("/404");
+}
+
+if (Astro.cache?.enabled && cacheHint) Astro.cache.set(cacheHint);
+
+const publishedAt = post.data.publishedAt ? new Date(post.data.publishedAt) : null;
+---
+
+<Base title={post.data.title} description={post.data.excerpt}>
+	<article class="post">
+		<header class="post-header">
+			<h1>{post.data.title}</h1>
+			{
+				publishedAt && (
+					<time datetime={publishedAt.toISOString()}>
+						{publishedAt.toLocaleDateString(undefined, {
+							year: "numeric",
+							month: "long",
+							day: "numeric",
+						})}
+					</time>
+				)
+			}
+		</header>
+
+		{post.data.excerpt && <p class="lead">{post.data.excerpt}</p>}
+
+		{post.data.content && <PortableText value={post.data.content} />}
+
+		<footer class="post-footer">
+			<a href="/blog">&larr; Back to all posts</a>
+		</footer>
+	</article>
+</Base>
+
+<style>
+	.post {
+		max-width: 720px;
+		margin: 0 auto;
+		padding: var(--spacing-3xl) var(--spacing-lg);
+	}
+
+	.post-header {
+		margin-bottom: var(--spacing-2xl);
+		text-align: center;
+	}
+
+	.post-header h1 {
+		margin-bottom: var(--spacing-sm);
+		color: #f5793b;
+	}
+
+	.post-header time {
+		font-size: 0.875rem;
+		color: var(--color-muted);
+		opacity: 0.7;
+	}
+
+	.lead {
+		font-size: 1.125rem;
+		color: var(--color-muted, #ffbd39);
+		margin-bottom: var(--spacing-2xl);
+		font-style: italic;
+	}
+
+	.post-footer {
+		margin-top: var(--spacing-3xl);
+		padding-top: var(--spacing-xl);
+		border-top: 1px solid rgba(255, 189, 57, 0.15);
+		text-align: center;
+	}
+
+	.post-footer a {
+		color: #f5793b;
+		text-decoration: none;
+	}
+
+	.post-footer a:hover {
+		color: #ffbd39;
+	}
+</style>
