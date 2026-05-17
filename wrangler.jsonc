@@ -4,6 +4,9 @@
 	"main": "./src/worker.ts",
 	"compatibility_date": "2026-02-24",
 	"compatibility_flags": ["nodejs_compat"],
+	"vars": {
+		"CF_ZONE_ID": "1c33402086210619ecb9cac2aa284c51"
+	},
 	"d1_databases": [
 		{
 			"binding": "DB",

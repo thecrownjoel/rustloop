@@ -6,9 +6,11 @@
  * pages and posts show up immediately at the edge instead of being
  * served from a stale CDN cache.
  *
- * Configure in admin: Plugins → Cloudflare Cache Purge → Settings.
- * Required: a CF API token scoped to `Zone.Cache Purge` on this site,
- * and the zone ID. Both are stored encrypted in the plugin KV.
+ * Configuration order of precedence (first match wins):
+ *   1. Worker env vars: CF_PURGE_TOKEN + CF_ZONE_ID
+ *        - Set via `wrangler secret put CF_PURGE_TOKEN`
+ *        - Zone ID lives in wrangler.jsonc `vars`
+ *   2. Plugin KV settings (encrypted) as a fallback override
  *
  * Failures are logged and swallowed — a transient CF outage must
  * never block a content save.
@@ -19,15 +21,29 @@ import type { PluginDefinition } from "emdash";
 
 const CF_API = "https://api.cloudflare.com/client/v4";
 
+function readEnv(key: string): string | undefined {
+	// `process.env` works in Cloudflare Workers when nodejs_compat is enabled.
+	const fromProcess = typeof process !== "undefined" ? process.env?.[key] : undefined;
+	if (fromProcess) return fromProcess;
+	// Fall back to globalThis (Workers bind vars/secrets there too).
+	const fromGlobal = (globalThis as Record<string, unknown>)[key];
+	return typeof fromGlobal === "string" ? fromGlobal : undefined;
+}
+
+async function resolveConfig(ctx: any) {
+	const apiToken = readEnv("CF_PURGE_TOKEN") ?? (await ctx.kv.get<string>("settings:apiToken"));
+	const zoneId = readEnv("CF_ZONE_ID") ?? (await ctx.kv.get<string>("settings:zoneId"));
+	return { apiToken, zoneId };
+}
+
 async function purgeCloudflareCache(ctx: any): Promise<void> {
 	const enabled = (await ctx.kv.get<boolean>("settings:enabled")) ?? true;
 	if (!enabled) return;
 
-	const apiToken = await ctx.kv.get<string>("settings:apiToken");
-	const zoneId = await ctx.kv.get<string>("settings:zoneId");
+	const { apiToken, zoneId } = await resolveConfig(ctx);
 
 	if (!apiToken || !zoneId) {
-		ctx.log.warn("CF purge skipped: apiToken or zoneId not configured");
+		ctx.log.warn("CF purge skipped: CF_PURGE_TOKEN or CF_ZONE_ID not set");
 		return;
 	}
 
@@ -61,7 +77,7 @@ async function purgeCloudflareCache(ctx: any): Promise<void> {
 
 const definition: PluginDefinition = {
 	id: "cf-cache-purge",
-	version: "0.1.0",
+	version: "0.2.0",
 
 	capabilities: ["network:request"],
 	allowedHosts: ["api.cloudflare.com"],
@@ -76,14 +92,15 @@ const definition: PluginDefinition = {
 			},
 			apiToken: {
 				type: "secret",
-				label: "Cloudflare API Token",
+				label: "API Token (override)",
 				description:
-					"Token scoped to Zone.Cache Purge on rustloop.ai. Create at dash.cloudflare.com → My Profile → API Tokens.",
+					"Optional override. Prefer setting CF_PURGE_TOKEN as a Worker secret via `wrangler secret put CF_PURGE_TOKEN`.",
 			},
 			zoneId: {
 				type: "string",
-				label: "Cloudflare Zone ID",
-				description: "Found on the rustloop.ai zone overview page in the CF dashboard.",
+				label: "Zone ID (override)",
+				description:
+					"Optional override. Default comes from CF_ZONE_ID in wrangler.jsonc vars.",
 			},
 		},
 	},
@@ -91,7 +108,7 @@ const definition: PluginDefinition = {
 	hooks: {
 		"plugin:install": async (_event, ctx) => {
 			await ctx.kv.set("settings:enabled", true);
-			ctx.log.info("cf-cache-purge installed. Configure token + zone in admin settings.");
+			ctx.log.info("cf-cache-purge installed");
 		},
 
 		"content:afterSave": async (_event, ctx) => {
